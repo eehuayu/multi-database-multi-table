@@ -73,13 +73,50 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+DB_USER = 'root'
+DB_PASSWORD = ''
+DB_HOST = '127.0.0.1'
+DB_PORT = '3306'
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'django_admin',                # Or path to database file if using sqlite3.
+        'USER': DB_USER,                       # Not used with sqlite3.
+        'PASSWORD': DB_PASSWORD,               # Not used with sqlite3.
+        'HOST': DB_HOST,                       # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': DB_PORT,                       # Set to empty string for default. Not used with sqlite3.
+        'CONN_MAX_AGE': None,                  # 永不关闭
+    },
+    'user_info': {
+        'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'user_info',                   # Or path to database file if using sqlite3.
+        'USER': DB_USER,                       # Not used with sqlite3.
+        'PASSWORD': DB_PASSWORD,               # Not used with sqlite3.
+        'HOST': DB_HOST,                       # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': DB_PORT,                       # Set to empty string for default. Not used with sqlite3.
+        'CONN_MAX_AGE': None,                  # 永不关闭
+    },
+    'invoice': {
+        'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'invoice',                     # Or path to database file if using sqlite3.
+        'USER': DB_USER,                       # Not used with sqlite3.
+        'PASSWORD': DB_PASSWORD,               # Not used with sqlite3.
+        'HOST': DB_HOST,                       # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': DB_PORT,                       # Set to empty string for default. Not used with sqlite3.
+        'CONN_MAX_AGE': None,   # 永不关闭
+    },
+
 }
 
+# 数据库路由
+DATABASE_ROUTERS = [
+    'share.db_router.base_router.RouterBase',
+]
+DATABASE_APPS_MAPPING = {
+    'user_info': 'user_info',
+    'invoice': 'invoice',
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
