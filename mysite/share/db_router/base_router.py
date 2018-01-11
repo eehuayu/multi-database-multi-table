@@ -40,7 +40,7 @@ class RouterBase(object):
         return None
 
     def allow_migrate(self, db, app_label, model_name=None, **hints):
-        print(db, app_label, model_name, hints)
+        # print(db, app_label, model_name, hints)
         if db in DATABASE_MAPPING.values():
             return DATABASE_MAPPING.get(app_label) == db
         elif app_label in DATABASE_MAPPING:
